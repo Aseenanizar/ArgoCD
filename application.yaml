@@ -11,13 +11,13 @@ spec:
     targetRevision: HEAD
     path: dev
   destination: 
-    server: https://kubernetes.default.svc
+    server: https://kubernetes.default.svc #internal URL for the Kubernetes control plane 
     namespace: myapp
 
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+    - CreateNamespace=true #ensures that the specified namespace (myapp) will be created if it doesn’t already exist.
 
     automated:
-      selfHeal: true
-      prune: true
+      selfHeal: true  #Ensures that ArgoCD will automatically correct any divergence between the live state and the desired state in Git
+      prune: true   #Ensures that ArgoCD will automatically delete any Kubernetes resources that are no longer defined in the Git repository.
